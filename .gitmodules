@@ -1,0 +1,3 @@
+[submodule "MyJuliaPackage"]
+	path = MyJuliaPackage
+	url = /Users/moneymonel/Julia-Project/MyJuliaPackage
