@@ -4,21 +4,15 @@ using MyJuliaPackage
 using JuliaFormatter
 using Test
 
-DocMeta.setdocmeta!(
-	MyJuliaPackage,
-	:DocTestSetup,
-	:(using MyJuliaPackage);
-	recursive=true
-)
+DocMeta.setdocmeta!(MyJuliaPackage, :DocTestSetup, :(using MyJuliaPackage); recursive=true)
 
 @testset verbose = true "MyJuliaPackage.jl" begin
-
     @testset verbose = true "Code quality (Aqua.jl)" begin
         Aqua.test_all(MyJuliaPackage; ambiguities=false)
     end
 
     @testset verbose = true "Code formatting (JuliaFormatter.jl)" begin
-        @test format(MyJuliaPackage; verbose=true, overwrite=false)
+        @test format(MyJuliaPackage)
     end
 
     @testset verbose = true "Doctests (Documenter.jl)" begin
@@ -27,11 +21,11 @@ DocMeta.setdocmeta!(
 
     @testset verbose = true "Get upper bound" begin
         total = find_upper_bound()
-        @test 2 == 2
+
     end
-    
-	@testset verbose = true "Small instance" begin
-		input_path = joinpath(@__DIR__, "data", "example_input.txt")
+
+    @testset verbose = true "Small instance" begin
+        input_path = joinpath(@__DIR__, "data", "example_input.txt")
         output_path = joinpath(@__DIR__, "data", "example_output.txt")
         city = read_problem(input_path)
         solution = read_solutions(city, output_path)
@@ -40,13 +34,22 @@ DocMeta.setdocmeta!(
         end
         @test solution.feasible
         @test solution.total == 450
-	end
+    end
 
     @testset verbose = true "Get Best Path" begin
         input_path = joinpath(@__DIR__, "data", "example_input.txt")
         output_path = joinpath(@__DIR__, "data", "example_output.txt")
         city = read_problem(input_path)
-        path, duration = find_best_path(2, 2, 0, city.total_duration, city.streets, city.visited, city.neighboring_streets, city.start_point)
+        path, duration = find_best_path(
+            2,
+            2,
+            0,
+            city.total_duration,
+            city.streets,
+            city.visited,
+            city.neighboring_streets,
+            city.start_point,
+        )
         @test path == [1, 2, 3]
     end
 
@@ -57,4 +60,3 @@ DocMeta.setdocmeta!(
         #@test solution.feasible
     end
 end
-

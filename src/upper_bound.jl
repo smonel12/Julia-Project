@@ -4,8 +4,8 @@ function find_upper_bound()
     city = read_problem()
     n_cars = city.n_cars
     distance, duration = calculate_totals(city)
-    distance_per_car = distance/n_cars
-    duration_per_car = duration/n_cars
+    distance_per_car = distance / n_cars
+    duration_per_car = duration / n_cars
     return distance_per_car < city.total_duration
 end
 
@@ -20,5 +20,5 @@ function calculate_totals(city::City)
 end
 
 function calculate_shortest_path(city::City)
-    starting = city.start_point
+    return starting = city.start_point
 end

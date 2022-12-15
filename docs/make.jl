@@ -1,7 +1,7 @@
 using MyJuliaPackage
 using Documenter
 
-DocMeta.setdocmeta!(Julia-Project, :DocTestSetup, :(using MyJuliaPackage); recursive=true)
+DocMeta.setdocmeta!(MyJuliaPackage, :DocTestSetup, :(using MyJuliaPackage); recursive=true)
 
 makedocs(;
     modules=[MyJuliaPackage],
@@ -14,12 +14,7 @@ makedocs(;
         edit_link="main",
         assets=String[],
     ),
-    pages=[
-        "Home" => "index.md",
-    ],
+    pages=["Home" => "index.md"],
 )
 
-deploydocs(;
-    repo="github.com/smonel/Julia-Project.jl",
-    devbranch="main",
-)
+deploydocs(; repo="github.com/smonel/Julia-Project.jl", devbranch="main")

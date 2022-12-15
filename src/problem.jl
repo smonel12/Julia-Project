@@ -17,9 +17,9 @@ Base.@kwdef struct City
     total_duration::Int
     n_cars::Int
     start_point::Int
-    neighboring_streets::Dict{Int, Vector{Street}}
+    neighboring_streets::Dict{Int,Vector{Street}}
     streets::Vector{Street}
-    visited::Dict{Street, Bool}
+    visited::Dict{Street,Bool}
 end
 
 function City(data::AbstractString)
@@ -39,24 +39,25 @@ function City(data::AbstractString)
     end
 
     g = SimpleDiGraph()
-    neighbors = Dict{Int, Vector{Street}}()
-    visited = Dict{Street, Bool}()
+    neighbors = Dict{Int,Vector{Street}}()
+    visited = Dict{Street,Bool}()
     for start in streets
         if haskey(neighbors, start.endpointA) == false
-            candidates = [street for (s, street) in enumerate(streets) if (
-                                is_street_start(start.endpointA, street))
-                        ]
+            candidates = [
+                street for (s, street) in enumerate(streets) if
+                (is_street_start(start.endpointA, street))
+            ]
             neighbors[start.endpointA] = candidates
         end
         if haskey(neighbors, start.endpointB) == false
-            candidates = [street for (s, street) in enumerate(streets) if (
-                                is_street_start(start.endpointB, street))
-                        ]
+            candidates = [
+                street for (s, street) in enumerate(streets) if
+                (is_street_start(start.endpointB, street))
+            ]
             neighbors[start.endpointB] = candidates
         end
         visited[start] = false
     end
-    
 
     city = City(;
         total_duration=T,
@@ -64,7 +65,7 @@ function City(data::AbstractString)
         start_point=S + 1,
         neighboring_streets=neighbors,
         streets=streets,
-        visited = visited
+        visited=visited,
     )
     return city
 end
@@ -78,7 +79,6 @@ function Base.string(city::City)
     end
     return chop(s; tail=1)
 end
-
 
 """
     read_problem(path)
