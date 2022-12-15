@@ -1,5 +1,4 @@
 module MyJuliaPackage
-
 using HashCode2014
 
 using Artifacts

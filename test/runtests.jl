@@ -21,7 +21,6 @@ DocMeta.setdocmeta!(MyJuliaPackage, :DocTestSetup, :(using MyJuliaPackage); recu
 
     @testset verbose = true "Get upper bound" begin
         total = find_upper_bound()
-
     end
 
     @testset verbose = true "Small instance" begin
@@ -55,8 +54,8 @@ DocMeta.setdocmeta!(MyJuliaPackage, :DocTestSetup, :(using MyJuliaPackage); recu
 
     @testset verbose = true "Large instance" begin
         city = read_problem()
-        #solution = greedy_algo(city)
+        solution = greedy_algo(city)
         @test city.total_duration == 54000
-        #@test solution.feasible
+        @test solution.feasible
     end
 end
